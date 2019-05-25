@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "name": "Herbert Lago",
+      "username": "MirumBR",
+      "email": "hebertpdl@gmail.com",
+      "password": "dadsa",
+      "id": 1
+    },
+    {
+      "name": "Herbert Lago12",
+      "username": "dsad",
+      "email": "hebertpdl@gmail.com",
+      "password": "dsadasd",
+      "id": 2
+    },
+    {
+      "name": "Herbert Lago12",
+      "username": "dsad",
+      "email": "hebertpdl@gmail.com",
+      "password": "dsadasd",
+      "id": 3
+    },
+    {
+      "name": "Herbert Lagodsadas",
+      "username": "asdasd",
+      "email": "hebertpdl@gmail.com",
+      "password": "asdasd",
+      "id": 4
+    }
+  ]
+}
