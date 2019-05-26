@@ -4,11 +4,11 @@
       <b-col sm="8" md="4" offset-md="4" offset-sm="2">
         <h1>Register</h1>
         <div class="register-container">
-          <b-form @submit="save">
+          <b-form @submit.prevent="register">
             <b-form-group label="Name" label-for="name">
               <b-form-input
                 id="name"
-                v-model="form.name"
+                v-model="name"
                 type="text"
                 required
                 placeholder="Name"
@@ -17,7 +17,7 @@
             <b-form-group label="Username" label-for="username">
               <b-form-input
                 id="username"
-                v-model="form.username"
+                v-model="username"
                 type="text"
                 required
                 placeholder="Username" 
@@ -26,7 +26,7 @@
             <b-form-group label="Email" label-for="email">
               <b-form-input
                 id="email"
-                v-model="form.email"
+                v-model="email"
                 type="text"
                 required
                 placeholder="E-mail" 
@@ -35,7 +35,7 @@
             <b-form-group label="Password" label-for="password">
               <b-form-input
                 id="password"
-                v-model="form.password"
+                v-model="password"
                 type="password"
                 required
                 placeholder="Password" 
@@ -50,17 +50,14 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data(){
     return {
-      form: {
-        name: '',
-        username: '',
-        email: '',
-        password: ''
-      }
+      name: '',
+      username: '',
+      email: '',
+      password: ''
     }
   },
   computed: {
@@ -69,12 +66,14 @@ export default {
     }
   },
   methods: {
-    save(){
-      const user = {...this.form}
-      const url = 'http://localhost:3001/users/'
-      axios.post(url, user)
-      //   .then(resp => {
-      // })
+    register: function () {
+      let data = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      }
+      this.$store.dispatch('register', data)
+      .then(() => this.$router.push('/users'))
     }
   }
 }

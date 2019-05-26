@@ -5,7 +5,7 @@
         <h1>Users list</h1>
         <div class="table-container">
           <!-- {{ info }} -->
-          <b-table striped hover :items="info" :fields="fields"></b-table>
+          <b-table striped hover :items="info? info.users : info" :fields="fields"></b-table>
         </div>
       </b-col>
     </b-row>
@@ -13,19 +13,18 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data() {
     return {
       fields: [
-        {key: 'name', sortable: true}, 'username', 'email'],
-      info: null
+        {key: 'name', sortable: true}, 'email'],
+      info: null,
     }
   },
   mounted () {
-    axios
-      .get('http://localhost:3001/users')
+    this.$http
+      .get('http://localhost:3000/users')
       .then((response) => {
         this.info = response.data
       })

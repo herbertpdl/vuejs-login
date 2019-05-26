@@ -4,20 +4,20 @@
       <b-col sm="8" md="4" offset-md="4" offset-sm="2">
         <h1>Sign In</h1>
         <div class="login-container">
-          <b-form @submit="onSubmit">
+          <b-form @submit.prevent="login">
             <b-form-group>
               <b-form-input
-                id="username"
-                v-model="form.username"
-                type="text"
+                id="email"
+                v-model="email"
+                type="email"
                 required
-                placeholder="Username" 
+                placeholder="email" 
               ></b-form-input>
             </b-form-group>
             <b-form-group>
               <b-form-input
                 id="password"
-                v-model="form.password"
+                v-model="password"
                 type="password"
                 required
                 placeholder="Password"
@@ -33,13 +33,20 @@
 </template>
 
 <script>
+
 export default {
   data(){
     return {
-      form: {
-        username: '',
-        password: ''
-      }
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    login: function () {
+      let email = this.email 
+      let password = this.password
+      this.$store.dispatch('login', { email, password })
+      .then(() => this.$router.push('/users'))
     }
   }
 }
