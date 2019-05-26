@@ -7,3 +7,5 @@ To run the Front-end Application, go to login-vue folder and run the following c
 To run the Back-end Application, go to server folder and run the following commands on the Terminal:
   yarn install
   yarn start
+
+You need to register a new user to log in to the application.
