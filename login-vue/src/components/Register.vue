@@ -11,8 +11,12 @@
                 v-model="name"
                 type="text"
                 required
+                :state="name? nameValidation : ''"
                 placeholder="Name"
               ></b-form-input>
+              <b-form-invalid-feedback :state="name? nameValidation : ''">
+                This field must be at least 3 characters long.
+              </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group label="Username" label-for="username">
               <b-form-input
@@ -20,15 +24,20 @@
                 v-model="username"
                 type="text"
                 required
+                :state="username? usernameValidation : ''"
                 placeholder="Username" 
               ></b-form-input>
+              <b-form-invalid-feedback :state="username? usernameValidation : ''">
+                This field must be at least 3 characters long.
+              </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group label="Email" label-for="email">
               <b-form-input
                 id="email"
                 v-model="email"
-                type="text"
+                type="email"
                 required
+                :state="email? emailValidation : ''"
                 placeholder="E-mail" 
               ></b-form-input>
             </b-form-group>
@@ -61,9 +70,15 @@ export default {
     }
   },
   computed: {
-    validation() {
-      return this.form.name.length > 4 && this.form.name.length < 13
-    }
+    nameValidation() {
+      return this.name.length >= 3
+    },
+    usernameValidation() {
+      return this.username.length >= 3
+    },
+    emailValidation() {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+    },
   },
   methods: {
     register: function () {

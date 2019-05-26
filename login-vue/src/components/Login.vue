@@ -11,7 +11,7 @@
                 v-model="email"
                 type="email"
                 required
-                placeholder="email" 
+                placeholder="E-mail" 
               ></b-form-input>
             </b-form-group>
             <b-form-group>
@@ -23,7 +23,7 @@
                 placeholder="Password"
               ></b-form-input>
             </b-form-group>
-            <b-button type="submit" variant="primary">Login</b-button>
+            <b-button type="submit" :class="{loading: loading}" variant="primary"><div class="loader"></div><span>Login</span></b-button>
           </b-form>
           <p class="sign-up">Don't have any account? <router-link to="/register">Sign-up</router-link></p>
         </div>
@@ -39,12 +39,14 @@ export default {
     return {
       email: '',
       password: '',
+      loading: false
     }
   },
   methods: {
     login: function () {
       let email = this.email 
       let password = this.password
+      this.loading = true
       this.$store.dispatch('login', { email, password })
       .then(() => this.$router.push('/users'))
     }
@@ -59,11 +61,36 @@ export default {
     border-radius: 5px;
     padding: 30px;
     button {
+      position: relative;
       width: 100%;
+      div{
+        display: none;
+      }
+      &.loading{
+        div{
+          display: block;
+        }
+      }
     }
   }
   .sign-up{
     color: #495057;
     margin: 20px 0 0 0;
+  }
+  .loader {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin .5s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 </style>
